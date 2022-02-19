@@ -51,3 +51,24 @@ if (window.ethereum) {
       console.log(err);
     });
 }
+
+const sendTransaction = async () => {
+  try {
+    let result = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [
+        {
+          from: accounts[0],
+          to: "0x6b2Fc28Cd52d71cDaE8FE4FFF13d625BDb760730",
+          gas: Number(21000).toString(16),
+          gasPrice: Number(2500000).toString(16),
+          value: Number(1000000000000000000).toString(16),
+        },
+      ],
+    });
+  } catch (err) {
+    console.log(err);
+    }
+    
+
+};

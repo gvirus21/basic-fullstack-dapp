@@ -28,6 +28,10 @@ const checkEthBalance = async () => {
       console.log(err);
     }
 
+    // converting hexadecimal value wei to Eth
+    balance = parseInt(balance);
+    balance = balance / Math.pow(10, 18);
+
     console.log("Eth Balance", balance);
   }
 };

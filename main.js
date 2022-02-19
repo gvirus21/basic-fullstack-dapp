@@ -37,10 +37,17 @@ const checkEthBalance = async () => {
 };
 
 const handleAccountChanged = (_accounts) => {
-    console.log("Accounts Changed");
-    accounts = _accounts
+  console.log("Accounts Changed");
+  accounts = _accounts;
 };
 
 if (window.ethereum) {
   window.ethereum.on("accountsChanged", handleAccountChanged);
+
+  window.ethereum
+    .request({ method: "eth_accounts" })
+    .then(handleAccountChanged)
+    .catch((err) => {
+      console.log(err);
+    });
 }

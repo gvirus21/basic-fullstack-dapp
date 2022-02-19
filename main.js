@@ -35,3 +35,12 @@ const checkEthBalance = async () => {
     console.log("Eth Balance", balance);
   }
 };
+
+const handleAccountChanged = (_accounts) => {
+    console.log("Accounts Changed");
+    accounts = _accounts
+};
+
+if (window.ethereum) {
+  window.ethereum.on("accountsChanged", handleAccountChanged);
+}

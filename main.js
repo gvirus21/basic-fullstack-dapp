@@ -270,7 +270,7 @@ const handleAccountChanged = (_accounts) => {
 };
 
 if (window.ethereum) {
-  //   console.log(ethers);
+
   window.ethereum.on("accountsChanged", handleAccountChanged);
 
   window.ethereum
@@ -305,9 +305,18 @@ const sendTransaction = async () => {
 };
 
 const checkTokenBalance = async () => {
-  let libcContract = new ethers.Contract(libcAddress, libcABI, provider);
-
-  let balance = await libcContract.balanceOf(accounts[0]);
-
+  const libcContract = new ethers.Contract(libcAddress, libcABI, provider);
+  const balance = await libcContract.balanceOf(accounts[0]);
   console.log(balance.toString());
 };
+
+
+const transferToken = async () => {
+  const signer = provider.getSigner();
+  const libcContract = new ethers.Contract(libcAddress, libcABI, signer);
+
+  const amount = ethers.utils.parseUnits("1.0", 18);
+
+  let tx = libcContract.transfer("0x4B1865B7786c517B2dfe6f8C4727320FF5178e6c");
+   console.log("tx: ", tx)
+}

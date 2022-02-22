@@ -320,4 +320,16 @@ const transferToken = async () => {
     amount
   );
   console.log("tx: ", tx);
+  checkEvents()
 };
+
+const checkEvents = () => {
+  let libcContract = new ethers.Contract(libcAddress, libcABI, provider);
+
+  libcContract.on("Transfer", (from, to, amount) => {
+    console.log("Got the event")
+    console.log(from)
+    console.log(to)
+    console.log(amount)
+  })
+}
